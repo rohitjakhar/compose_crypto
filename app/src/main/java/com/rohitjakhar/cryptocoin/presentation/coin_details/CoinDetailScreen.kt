@@ -23,13 +23,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.flowlayout.FlowRow
-import com.rohitjakhar.cryptocoin.presentation.Screen
 import com.rohitjakhar.cryptocoin.presentation.coin_details.component.CoinTag
 import com.rohitjakhar.cryptocoin.presentation.coin_details.component.TeamListItem
-import com.rohitjakhar.cryptocoin.presentation.coin_list.component.CoinListItem
 
 @Composable
-fun CoinListScreen(
+fun CoinDetailsScreen(
     viewModel: CoinDetailsViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -83,7 +81,7 @@ fun CoinListScreen(
                     )
                     Spacer(modifier = Modifier.height(15.dp))
                 }
-                items(coin.team) {teamMember ->
+                items(coin.team) { teamMember ->
                     TeamListItem(teamMember, modifier = Modifier.fillMaxWidth().padding(10.dp))
                     Divider()
                 }
