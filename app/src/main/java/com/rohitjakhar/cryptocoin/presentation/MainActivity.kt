@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rohitjakhar.cryptocoin.presentation.coin_details.CoinDetailsScreen
 import com.rohitjakhar.cryptocoin.presentation.coin_list.CoinListScreen
+import com.rohitjakhar.cryptocoin.presentation.person_detail.PersonDetailScreen
 import com.rohitjakhar.cryptocoin.presentation.theme.CryptoCoinTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +34,12 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.CoinDetailsScreen.route + "/{coin_id}"
                         ) {
-                            CoinDetailsScreen()
+                            CoinDetailsScreen(navController = navController)
+                        }
+                        composable(
+                            route = Screen.PersonDetailScreen.route + "/{person_id}"
+                        ) {
+                            PersonDetailScreen(navController = navController)
                         }
                     }
                 }

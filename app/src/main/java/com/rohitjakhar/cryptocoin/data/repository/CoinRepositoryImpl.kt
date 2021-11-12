@@ -3,6 +3,7 @@ package com.rohitjakhar.cryptocoin.data.repository
 import com.rohitjakhar.cryptocoin.data.remote.dto.CoinDetailsDto
 import com.rohitjakhar.cryptocoin.data.remote.dto.CoinDto
 import com.rohitjakhar.cryptocoin.data.remote.dto.CoinPaprikaApi
+import com.rohitjakhar.cryptocoin.data.remote.dto.PersonDetailDto
 import com.rohitjakhar.cryptocoin.domain.repository.CoinRepository
 import javax.inject.Inject
 
@@ -16,5 +17,9 @@ class CoinRepositoryImpl @Inject constructor(
 
     override suspend fun getCoinById(coinId: String): CoinDetailsDto {
         return api.getCoinById(coinId)
+    }
+
+    override suspend fun getPersonDetails(personId: String): PersonDetailDto {
+        return api.getPersonDetail(personId)
     }
 }

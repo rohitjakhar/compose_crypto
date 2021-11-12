@@ -1,5 +1,6 @@
 package com.rohitjakhar.cryptocoin.presentation.coin_details.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,11 +16,11 @@ import com.rohitjakhar.cryptocoin.data.remote.dto.CoinDetailsDto
 @Composable
 fun TeamListItem(
     teamMember: CoinDetailsDto.TeamMember,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = teamMember.name,

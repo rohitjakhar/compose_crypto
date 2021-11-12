@@ -1,5 +1,6 @@
 package com.rohitjakhar.cryptocoin.presentation.coin_details
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -22,13 +23,16 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowRow
+import com.rohitjakhar.cryptocoin.presentation.Screen
 import com.rohitjakhar.cryptocoin.presentation.coin_details.component.CoinTag
 import com.rohitjakhar.cryptocoin.presentation.coin_details.component.TeamListItem
 
 @Composable
 fun CoinDetailsScreen(
-    viewModel: CoinDetailsViewModel = hiltViewModel()
+    viewModel: CoinDetailsViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
@@ -82,7 +86,12 @@ fun CoinDetailsScreen(
                     Spacer(modifier = Modifier.height(15.dp))
                 }
                 items(coin.team) { teamMember ->
-                    TeamListItem(teamMember, modifier = Modifier.fillMaxWidth().padding(10.dp))
+                    TeamListItem(
+                        teamMember,
+                        modifier = Modifier.fillMaxWidth().padding(10.dp).clickable {
+                            navController.navigate(Screen.PersonDetailScreen.route + "/${teamMember.id}")
+                        }
+                    )
                     Divider()
                 }
             }
