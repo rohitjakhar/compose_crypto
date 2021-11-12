@@ -1,4 +1,4 @@
-package com.rohitjakhar.cryptocoin.presentation.theme
+package com.rohitjakhar.cryptocoin.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
