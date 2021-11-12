@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.os.persistableBundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rohitjakhar.cryptocoin.presentation.person_detail.component.Position
@@ -39,9 +38,11 @@ fun PersonDetailScreen(
                         text = "Name: ${personDetail.name}"
                     )
                     Spacer(modifier = Modifier.padding(8.dp))
-                    Text(
-                        text = personDetail.description
-                    )
+                    personDetail.description?.let {
+                        Text(
+                            text = it
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(8.dp))
                     Text(
                         text = "Github: ${personDetail.githubLink}"
@@ -60,7 +61,7 @@ fun PersonDetailScreen(
                     )
                     Spacer(modifier = Modifier.padding(8.dp))
                 }
-                items(personDetail.position) {position ->
+                items(personDetail.position) { position ->
                     Position(
                         position = position
                     )

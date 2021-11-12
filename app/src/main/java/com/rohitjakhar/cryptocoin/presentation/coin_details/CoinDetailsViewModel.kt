@@ -33,13 +33,11 @@ class CoinDetailsViewModel @Inject constructor(
                 is Resource.Empty -> {
                 }
                 is Resource.Error -> {
-
                     _state.value = CoinDetailsState(
                         error = result.message ?: "Unknown Error"
                     )
                 }
                 is Resource.Loading -> {
-
                     _state.value = CoinDetailsState(isLoading = true)
                 }
                 is Resource.Success -> {

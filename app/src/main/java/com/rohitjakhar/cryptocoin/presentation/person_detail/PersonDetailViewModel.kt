@@ -10,6 +10,8 @@ import com.rohitjakhar.cryptocoin.domain.use_case.person_detail.GetPersonDetailU
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,32 +30,30 @@ class PersonDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getPersonDetail(personId: String) {
-        viewModelScope.launch(IO) {
-            personDetailUserCase.invoke(personId).collectLatest {
-                when (it) {
-                    is Resource.Empty -> {
-                        _state.value = PersonDetailState(
-                            personDetails = null
-                        )
-                    }
-                    is Resource.Error -> {
-                        _state.value = PersonDetailState(
-                            error = it.message ?: "Unknown Error"
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _state.value = PersonDetailState(
-                            isLoading = true
-                        )
-                    }
-                    is Resource.Success -> {
-                        _state.value = PersonDetailState(
-                            personDetails = it.data
-                        )
-                    }
+    fun getPersonDetail(personId: String) {
+        personDetailUserCase(personId).onEach {
+            when (it) {
+                is Resource.Empty -> {
+                    _state.value = PersonDetailState(
+                        personDetails = null
+                    )
+                }
+                is Resource.Error -> {
+                    _state.value = PersonDetailState(
+                        error = it.message ?: "Unknown Error"
+                    )
+                }
+                is Resource.Loading -> {
+                    _state.value = PersonDetailState(
+                        isLoading = true
+                    )
+                }
+                is Resource.Success -> {
+                    _state.value = PersonDetailState(
+                        personDetails = it.data
+                    )
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 }

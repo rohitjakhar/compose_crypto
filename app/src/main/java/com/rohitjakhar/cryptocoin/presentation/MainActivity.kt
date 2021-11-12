@@ -5,12 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rohitjakhar.cryptocoin.presentation.coin_details.CoinDetailsScreen
-import com.rohitjakhar.cryptocoin.presentation.coin_list.CoinListScreen
-import com.rohitjakhar.cryptocoin.presentation.person_detail.PersonDetailScreen
 import com.rohitjakhar.cryptocoin.presentation.theme.CryptoCoinTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,26 +17,7 @@ class MainActivity : ComponentActivity() {
             CryptoCoinTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = Screen.CoinListScreen.route
-                    ) {
-                        composable(
-                            route = Screen.CoinListScreen.route
-                        ) {
-                            CoinListScreen(navController)
-                        }
-                        composable(
-                            route = Screen.CoinDetailsScreen.route + "/{coin_id}"
-                        ) {
-                            CoinDetailsScreen(navController = navController)
-                        }
-                        composable(
-                            route = Screen.PersonDetailScreen.route + "/{person_id}"
-                        ) {
-                            PersonDetailScreen(navController = navController)
-                        }
-                    }
+                    Navigation(navController)
                 }
             }
         }

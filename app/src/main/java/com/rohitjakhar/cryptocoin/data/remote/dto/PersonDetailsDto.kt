@@ -5,7 +5,7 @@ import com.rohitjakhar.cryptocoin.domain.model.PersonDetail
 
 data class PersonDetailDto(
     @SerializedName("description")
-    val description: String,
+    val description: String? = null,
     @SerializedName("id")
     val id: String,
     @SerializedName("links")
@@ -19,13 +19,13 @@ data class PersonDetailDto(
 ) {
     data class Links(
         @SerializedName("github")
-        val github: List<Github>,
+        val github: List<Github>? = null,
         @SerializedName("linkedin")
-        val linkedin: List<Linkedin>,
+        val linkedin: List<Linkedin>? = null,
         @SerializedName("medium")
-        val medium: List<Medium>,
+        val medium: List<Medium>? = null,
         @SerializedName("twitter")
-        val twitter: List<Twitter>
+        val twitter: List<Twitter>? = null
     ) {
         data class Github(
             @SerializedName("followers")
@@ -71,10 +71,10 @@ fun PersonDetailDto.toPersonDetail(): PersonDetail {
         id = id,
         name = name,
         description = description,
-        githubLink = links.github[0].url,
-        linkedinLink = links.linkedin[0].url,
-        mediumLink = links.medium[0].url,
-        twitterLink = links.twitter[0].url,
+        githubLink = links.github?.first()?.url,
+        linkedinLink = links.linkedin?.first()?.url,
+        mediumLink = links.medium?.first()?.url,
+        twitterLink = links.twitter?.first()?.url,
         position = positions
     )
 }
