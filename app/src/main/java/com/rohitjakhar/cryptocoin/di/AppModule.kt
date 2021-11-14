@@ -8,8 +8,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -18,9 +22,33 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesPaprikaApi(): CoinPaprikaApi {
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttp(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): Call.Factory {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .callTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesPaprikaApi(
+        callFactory: Call.Factory
+    ): CoinPaprikaApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .callFactory(callFactory)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CoinPaprikaApi::class.java)

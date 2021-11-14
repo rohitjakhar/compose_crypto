@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.rohitjakhar.cryptocoin.presentation.Screen
 import com.rohitjakhar.cryptocoin.presentation.person_detail.component.Position
 
 @Composable
@@ -64,7 +65,9 @@ fun PersonDetailScreen(
                 items(personDetail.position) { position ->
                     Position(
                         position = position
-                    )
+                    ) { coinId ->
+                        navController.navigate(Screen.CoinDetailsScreen.route + "/$coinId")
+                    }
                 }
             }
         }
