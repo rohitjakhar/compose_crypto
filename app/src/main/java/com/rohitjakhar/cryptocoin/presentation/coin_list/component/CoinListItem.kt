@@ -1,10 +1,12 @@
 package com.rohitjakhar.cryptocoin.presentation.coin_list.component
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,19 +22,21 @@ import com.rohitjakhar.cryptocoin.domain.model.Coin
 @Composable
 fun CoinListItem(
     coin: Coin,
-    onItemClin: (Coin) -> Unit
+    onItemClick: (Coin) -> Unit
 ) {
     Row(
         modifier = Modifier
+            .padding(8.dp)
             .fillMaxWidth()
-            .clickable { onItemClin(coin) }
-            .padding(20.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(8.dp))
+            .clickable { onItemClick(coin) },
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             text = "${coin.rank}. ${coin.name} (${coin.symbol})",
             style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(12.dp)
         )
         Text(
             text = if (coin.isActive) "Active" else "inactive",
@@ -40,7 +44,7 @@ fun CoinListItem(
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.body2,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.padding(12.dp).align(Alignment.CenterVertically)
         )
     }
 }
