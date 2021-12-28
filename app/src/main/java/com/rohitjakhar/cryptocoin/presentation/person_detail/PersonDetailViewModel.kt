@@ -8,11 +8,8 @@ import com.rohitjakhar.cryptocoin.common.Constant.PERSON_ID
 import com.rohitjakhar.cryptocoin.common.Resource
 import com.rohitjakhar.cryptocoin.domain.use_case.person_detail.GetPersonDetailUserCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

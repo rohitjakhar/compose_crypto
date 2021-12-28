@@ -1,6 +1,5 @@
 package com.rohitjakhar.cryptocoin.data.remote.dto
 
-
 import com.google.gson.annotations.SerializedName
 import com.rohitjakhar.cryptocoin.domain.model.Coin
 

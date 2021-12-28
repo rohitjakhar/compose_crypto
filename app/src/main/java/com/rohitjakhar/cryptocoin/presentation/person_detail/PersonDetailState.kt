@@ -1,6 +1,5 @@
 package com.rohitjakhar.cryptocoin.presentation.person_detail
 
-import com.rohitjakhar.cryptocoin.domain.model.Coin
 import com.rohitjakhar.cryptocoin.domain.model.PersonDetail
 
 data class PersonDetailState(
